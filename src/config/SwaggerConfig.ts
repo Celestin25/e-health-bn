@@ -9,9 +9,9 @@ const options = {
  definition: {
   openapi: "3.0.0",
   info: {
-   title: "Code crafters api documentation",
+   title: "",
    version: "1.0.0",
-   description: "Multi vendor ecommerce api docs",
+
   },
   components: {
    securitySchemes: {
@@ -27,7 +27,7 @@ const options = {
     url: "http://localhost:5000",
    },
    {
-    url: "https://e-commerce-crafters-bn-6aiy.onrender.com",
+    url: "",
    },
   ],
  },
