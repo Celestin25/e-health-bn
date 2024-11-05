@@ -34,7 +34,7 @@ const setupServer = () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(
     session({
-      secret: "crafters1234",
+      secret: "mindmed1234",
       resave: false,
       saveUninitialized: true,
       cookie: { secure: false },

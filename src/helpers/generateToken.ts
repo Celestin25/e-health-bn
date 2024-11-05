@@ -20,7 +20,7 @@ const generateToken = async (userData: User) => {
       vendor: vendorId,
       password: userData.password,
     },
-    "crafters1234",
+    "mindmed1234",
     {
       expiresIn: "1d",
     }
