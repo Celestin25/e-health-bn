@@ -1,7 +1,7 @@
 {
- "name": "e-commerce-crafters-bn",
+ "name": "e-health-bn",
  "version": "1.0.0",
- "description": "Crafter's backend repo",
+ "description": "mindmed's backend repo",
  "main": "index.js",
  "scripts": {
   "dev": "nodemon src/index.ts",

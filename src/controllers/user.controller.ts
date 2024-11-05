@@ -21,7 +21,7 @@ export const Welcome = async (req: Request, res: Response) => {
     res
       .status(200)
       .send(
-        "<h1 style='text-align:center;font-family: sans-serif'>Welcome to our backend as code crafters team </h1>"
+        "<h1 style='text-align:center;font-family: sans-serif'>Welcome to our backend as code</h1>"
       );
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -82,7 +82,7 @@ export const register = async (req: Request, res: Response) => {
   }
   try {
     const hashedPwd = bcrypt.hashSync(password, 10);
-    const token = jwt.sign({ email }, "crafters123", { expiresIn: "60s" });
+    const token = jwt.sign({ email }, "mindmed123", { expiresIn: "60s" });
     const insertUser = await User.create({
       name: name,
       email: email,
@@ -336,7 +336,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "crafters123") as {
+    const decoded = jwt.verify(token, "mindmed123") as {
       email: string;
     };
     const email = decoded.email;
@@ -365,13 +365,13 @@ export const verifyEmail = async (req: Request, res: Response) => {
       let mailOptions = {
         from: process.env.EMAIL,
         to: email,
-        subject: "Welcome to Our E-commerce Platform",
+        subject: "Welcome to Our E-health Platform",
         html: `<!DOCTYPE html>
       <html lang="en">
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Welcome to Our E-commerce Platform</title>
+          <title>Welcome to Our E-health Platform</title>
           <style>
               body {
                   font-family: Arial, sans-serif;
