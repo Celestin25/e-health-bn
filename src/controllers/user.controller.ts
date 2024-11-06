@@ -108,7 +108,7 @@ export const register = async (req: Request, res: Response) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Our E-commerce Platform</title>
+        <title>Welcome to Our E-health Platform</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -432,12 +432,12 @@ export const verifyEmail = async (req: Request, res: Response) => {
       <body>
           <div class="container">
               <div class="header">
-                  <h1>Welcome to Our E-commerce Platform</h1>
+                  <h1>Welcome to Our E-health Platform</h1>
               </div>
               <div class="content">
                   <h2>Hello ${userData.name},</h2>
                   <p>Thank you for creating an account with us! We are thrilled to have you on board.</p>
-                  <p>At Our E-commerce Platform, we offer a wide range of products to suit all your needs. To get started, click the button below to visit our store and explore our latest collections.</p>
+                  <p>At Our E-health Platform, we offer a wide range of products to suit all your needs. To get started, click the button below to visit our store and explore our latest collections.</p>
                   <a href="www.gurisha.com" class="button"><span>Visit our store</span></a>
                   <p>If you have any questions or need assistance, feel free to contact our support team.</p>
                   <p>Happy shopping!</p>

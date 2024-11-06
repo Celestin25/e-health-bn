@@ -45,7 +45,7 @@ export const checkExpiringProducts = async (req?: Request, res?: Response) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Our E-commerce Platform</title>
+        <title>Welcome to Our E-health Platform</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -174,7 +174,7 @@ export const checkExpiredProducts = async (req?: Request, res?: Response) => {
                     <head>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Welcome to Our E-commerce Platform</title>
+                        <title>Welcome to Our E-health Platform</title>
                         <style>
                             body {
                                 font-family: Arial, sans-serif;

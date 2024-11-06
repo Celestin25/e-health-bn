@@ -1,53 +1,44 @@
-import { config } from "dotenv";
-import nodemailer from "nodemailer";
-import Product from "../database/models/product";
-import Vendor from "../database/models/vendor";
-import User from "../database/models/user";
-import { addNotification } from "../controllers/notifications.controller";
+import { config } from 'dotenv';
+import nodemailer from 'nodemailer';
+import Product from '../database/models/product';
+import Vendor from '../database/models/vendor';
+import User from '../database/models/user';
+import { addNotification } from '../controllers/notifications.controller';
 
-export async function sendEmailNotification(
-  product: Product,
-  message: string,
-  scenario: string
-): Promise<void> {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-  const vendor = await Vendor.findOne({
-    where: { vendorId: product.vendorId },
-    attributes: ["userId", "storeName"],
-  });
 
-  if (!vendor) {
-    throw new Error("Vendor not found");
-  }
+export async function sendEmailNotification(product: Product, message: string, scenario: string): Promise<void> {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASS,
+        },
+    });
+    const vendor = await Vendor.findOne({ where: { vendorId: product.vendorId }, attributes: ['userId', 'storeName'] })
 
-  const user = await User.findOne({
-    where: { userId: vendor.userId },
-    attributes: ["email", "name"],
-  });
+    if (!vendor) {
+        throw new Error('Vendor not found');
+    }
 
-  if (!user) {
-    throw new Error("User not found");
-  }
+    const user = await User.findOne({ where: { userId: vendor.userId }, attributes: ['email', 'name'] })
 
-  const data = {
-    name: user.name,
-    storeName: vendor.storeName,
-    email: user.email,
-  };
+    if (!user) {
+        throw new Error('User not found');
+    }
 
-  let subject = message;
-  let htmlContent = `<p>${message}: ${product.name}</p>`;
+    const data = {
+        name: user.name,
+        storeName: vendor.storeName,
+        email: user.email
+    };
 
-  switch (scenario) {
-    case "product_added":
-      subject = "New Product Added";
-      htmlContent = `<!DOCTYPE html>
+    let subject = message;
+    let htmlContent = `<p>${message}: ${product.name}</p>`;
+
+    switch (scenario) {
+        case 'product_added':
+            subject = 'New Product Added';
+            htmlContent = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -121,7 +112,7 @@ export async function sendEmailNotification(
         
                 <p>If you have any questions or need assistance, feel free to contact our support team.</p>
                 <p>Happy shopping!</p>
-                <p>Best regards,<br>mindmed</p>
+                <p>Best regards,<br>Crafter</p>
             </div>
             <div class="footer">
                 <p>&copy; 2024 crafters. All rights reserved.</p>
@@ -130,10 +121,10 @@ export async function sendEmailNotification(
         </div>
     </body>
     </html>`;
-      break;
-    case "product_removed":
-      subject = "Product Deleted";
-      htmlContent = `<!DOCTYPE html>
+            break;
+        case 'product_removed':
+            subject = 'Product Deleted';
+            htmlContent = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -211,16 +202,16 @@ export async function sendEmailNotification(
                 <p>Best regards,<br>Crafter</p>
             </div>
             <div class="footer">
-                <p>&copy; 2024 mindmed. All rights reserved.</p>
+                <p>&copy; 2024 crafters. All rights reserved.</p>
                 <p><a class='email' href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a></p>
             </div>
         </div>
     </body>
     </html>`;
-      break;
-    case "product_updated":
-      subject = "Product Updated";
-      htmlContent = `<!DOCTYPE html>
+            break;
+        case 'product_updated':
+            subject = 'Product Updated';
+            htmlContent = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -295,59 +286,50 @@ export async function sendEmailNotification(
         
                 <p>Incase you have any questions or need assistance, feel free to contact our support team.</p>
                 <p>Happy shopping!</p>
-                <p>Best regards,<br>MindMed</p>
+                <p>Best regards,<br>Crafter</p>
             </div>
             <div class="footer">
-                <p>&copy; 2024 mindmed. All rights reserved.</p>
+                <p>&copy; 2024 crafters. All rights reserved.</p>
                 <p><a class='email' href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a></p>
             </div>
         </div>
     </body>
     </html>`;
-    default:
-      break;
-  }
+        default:
+            break;
+    }
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: data.email,
-    subject: subject,
-    html: htmlContent,
-  };
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: data.email,
+        subject: subject,
+        html: htmlContent,
+    };
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: " + info.response);
-  } catch (error) {
-    console.error("Error sending email:", error);
-  }
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ' + info.response);
+    } catch (error) {
+        console.error('Error sending email:', error);
+    }
 }
 
-export async function sendInAppNotification(
-  product: Product,
-  message: string,
-  action: string
-): Promise<void> {
-  const vendor = await Vendor.findOne({
-    where: { vendorId: product.vendorId },
-    attributes: ["userId", "storeName"],
-  });
+export async function sendInAppNotification(product: Product, message: string, action: string): Promise<void> {
+    const vendor = await Vendor.findOne({ where: { vendorId: product.vendorId }, attributes: ['userId', 'storeName'] });
 
-  if (!vendor) {
-    throw new Error("Vendor not found");
-  }
+    if (!vendor) {
+        throw new Error('Vendor not found');
+    }
 
-  const user = await User.findOne({
-    where: { userId: vendor.userId },
-    attributes: ["email", "name"],
-  });
+    const user = await User.findOne({ where: { userId: vendor.userId }, attributes: ['email', 'name'] });
 
-  if (!user) {
-    throw new Error("User not found");
-  }
+    if (!user) {
+        throw new Error('User not found');
+    }
 
-  const notificationMessage = `Notification: ${message} - ${product.name}`;
+    const notificationMessage = `Notification: ${message} - ${product.name}`;
 
-  await sendEmailNotification(product, message, action);
-  await addNotification(product.vendorId, notificationMessage);
+    await sendEmailNotification(product, message, action);
+    await addNotification(product.vendorId, notificationMessage);
 }
+
