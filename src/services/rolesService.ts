@@ -3,11 +3,10 @@ import User from "../database/models/user";
 
 import nodemailer from "nodemailer";
 
-
 function toCapital(string: string): string {
   return string
     .split(" ")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 }
 
@@ -104,14 +103,13 @@ export const approveVendorRequest = async (userId: string) => {
                   <h2>Hello ${toCapital(user.name)},</h2>
                   <p>We are excited to inform you that your request to become a vendor has been approved!</p>
                   <p>You can now start listing your products and take advantage of our vendor features.</p>
-                  <a href="www.gurisha.com" class="button"><span>Get Started</span></a>
-                  <p>If you have any questions or need assistance, feel free to contact our support team.</p>
-                  <p>Welcome aboard and happy selling!</p>
-                  <p>Best regards,<br>Crafter Team</p>
+                  <a href="www.gurisha.com" clas Team</p>
               </div>
               <div class="footer">
-                  <p>&copy; 2024 Crafters. All rights reserved.</p>
-                  <p><a class='email' href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a></p>
+                  <p>&copy; 2024 Midmed. All rights reserved.</p>
+                  <p><a class='email' href="mailto:${process.env.EMAIL}">${
+        process.env.EMAIL
+      }</a></p>
               </div>
           </div>
       </body>
@@ -124,7 +122,7 @@ export const approveVendorRequest = async (userId: string) => {
   }
 };
 
-export const rejectVendorRequest = async (userId: string,  message: string) => {
+export const rejectVendorRequest = async (userId: string, message: string) => {
   const vendor = await Vendor.findOne({ where: { userId: userId } });
   const user: any = await User.findOne({ where: { userId: userId } });
 
@@ -219,11 +217,13 @@ export const rejectVendorRequest = async (userId: string,  message: string) => {
               <p>Unfortunately, we are unable to approve your application at this time because <strong>${message.toLowerCase()}</strong>.</p>
               <p> Please feel free to reach out to our support team if you have any questions or require further information.</p>
               <p>Thank you for your understanding.</p>
-              <p>Best regards,<br>Crafter Team</p>
+              <p>Best regards,<br>MidMed</p>
               </div>
               <div class="footer">
-                  <p>&copy; 2024 Crafters. All rights reserved.</p>
-                  <p><a class='email' href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a></p>
+                  <p>&copy; 2024 MidMed. All rights reserved.</p>
+                  <p><a class='email' href="mailto:${process.env.EMAIL}">${
+        process.env.EMAIL
+      }</a></p>
               </div>
           </div>
       </body>
