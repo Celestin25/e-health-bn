@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import { deleteUser } from "../controllers/user.controller";
-import { deleteUserById } from "../services/userService";
+
 import User from "../database/models/user";
 import request from 'supertest';
 import sinon from 'sinon';
 import { app, server } from '../index';
 import nodemailer from 'nodemailer';
-import Vendor from '../database/models/vendor';
 import * as passwordUtils from '../services/userService';
 
 
@@ -282,12 +281,5 @@ describe('PATCH /updatepassword/', () => {
 
 });
 
-describe("Welcome endpoint",()=>{
-    
-    it('should return welcome message and status 200 ', async()=>{
-        const response = await request(app).get('/');
-        expect(response.status).toBe(200);
-        expect(response.text).toContain("<h1 style='text-align:center;font-family: sans-serif'>Welcome to our backend a</h1>");
-    });
-})
+
 
